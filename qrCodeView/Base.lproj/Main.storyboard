@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dUB-p8-pao">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -23,21 +24,48 @@
                                     <constraint firstAttribute="height" constant="300" id="sjX-2b-2Cg"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2th-Vd-Nar">
+                                <rect key="frame" x="89" y="626" width="215" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Check SwiftUI Twin-View"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dzY-Vj-zjd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8Ln-8L-0jx"/>
+                            <constraint firstItem="2th-Vd-Nar" firstAttribute="top" secondItem="dzY-Vj-zjd" secondAttribute="bottom" constant="50" id="Efg-Zx-QEl"/>
                             <constraint firstItem="dzY-Vj-zjd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="KNR-jm-1LU"/>
+                            <constraint firstItem="2th-Vd-Nar" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="o0i-eV-BCx"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="5Hh-yq-QP7"/>
                     <connections>
+                        <outlet property="checkSUIViewButton" destination="2th-Vd-Nar" id="h5z-2b-bn4"/>
                         <outlet property="imageView" destination="dzY-Vj-zjd" id="WU1-tM-fsU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="118" y="4"/>
+            <point key="canvasLocation" x="1043.5114503816794" y="3.5211267605633805"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lQR-Xg-n6P">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dUB-p8-pao" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ouu-2K-M2V">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="d98-57-OiO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ymB-cO-E3Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="116.79389312977099" y="3.5211267605633805"/>
         </scene>
     </scenes>
     <resources>

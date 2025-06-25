@@ -6,22 +6,29 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ViewController: UIViewController {
 
     // MARK: IB Outlets
     @IBOutlet weak var imageView: UIImageView!
-    
+    @IBOutlet weak var checkSUIViewButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        imageView.image = AppUtility.sharedInstance.generateQRCode(from: "", color: .blue)
+        imageView.generateQRCode(from: "-")
         
-        //imageView.generateQRCode(from: "")
+        checkSUIViewButton.addTarget(self, action: #selector(handelCheckSUIView), for: .touchUpInside)
     }
 
+    
+    @objc func handelCheckSUIView() {
+        let hostSUIView = UIHostingController(rootView: SUIQRView())
+        //present(hostSUIView, animated: true)
+        navigationController?.pushViewController(hostSUIView, animated: true)
+    }
 
 }
 
