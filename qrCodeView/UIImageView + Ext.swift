@@ -13,51 +13,24 @@ import CoreImage.CIFilterBuiltins
 extension UIImageView {
     
     func generateQRCode(from string: String, color: UIColor? = nil) {
-        if #available(iOS 13.0, *) {
-            let context = CIContext()
-            let filter = CIFilter.qrCodeGenerator()
-            let data = Data(string.utf8)
-            filter.setValue(data, forKey: "inputMessage")
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
-            if var outputImage = filter.outputImage?.transformed(by: transform) {
-                
-                outputImage = transformCIImageUsingColor(image: outputImage, color: color)
-                
-                if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
-                    self.image = UIImage(cgImage: cgimg)
-                    return
-                }
-            }
-            self.image = UIImage(systemName: "xmark.circle")
-        } else {
-            let data = string.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
+        let context = CIContext()
+        let filter = CIFilter.qrCodeGenerator()
+        let data = Data(string.utf8)
+        filter.setValue(data, forKey: "inputMessage")
+        let transform = CGAffineTransform(scaleX: 3, y: 3)
+        if var outputImage = filter.outputImage?.transformed(by: transform) {
             
-            if let filter = CIFilter(name: "CIQRCodeGenerator") {
-                filter.setValue(data, forKey: "inputMessage")
-                let transform = CGAffineTransform(scaleX: 3, y: 3)
-                
-                
-                if var output = filter.outputImage?.transformed(by: transform) {
-                    output = transformCIImageUsingColor(image: output, color: color)
-                    let size = CGSize(width: 800, height: 800)
-                    UIGraphicsBeginImageContextWithOptions(size, false, 0)
-                    defer { UIGraphicsEndImageContext() }
-                    UIImage(ciImage: output).draw(in: CGRect(origin: .zero, size: size))
-                    if let qrcodeImage = UIGraphicsGetImageFromCurrentImageContext() {
-                        if let imageData = qrcodeImage.jpegData(compressionQuality: 1){
-                            self.image = UIImage(data: imageData)
-                            return
-                        }
-                    }
-                    
-                }
+            outputImage = transformCIImageUsingColor(image: outputImage, color: color)
+            
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                image = UIImage(cgImage: cgimg)
+                return
             }
         }
-        self.image = nil
-        
+        image = UIImage(systemName: "xmark.circle")
     }
     
-    private func transformCIImageUsingColor(image: CIImage, color: UIColor? = nil)-> CIImage {
+    private func transformCIImageUsingColor(image: CIImage, color: UIColor? = nil) -> CIImage {
         guard let color = color else { return image }
         let colorParameters = [
             "inputColor0": CIColor(color: color), // Foreground

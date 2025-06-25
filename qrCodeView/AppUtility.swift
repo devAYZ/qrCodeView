@@ -16,22 +16,7 @@ final class AppUtility {
     private init() {}
     
     func generateQRCode(from string: String, color: UIColor? = nil) -> UIImage? {
-        if #available(iOS 13.0, *) {
-            let context = CIContext()
-            let filter = CIFilter.qrCodeGenerator()
-            let data = Data(string.utf8)
-            filter.setValue(data, forKey: "inputMessage")
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
-            if var outputImage = filter.outputImage?.transformed(by: transform) {
-                
-                outputImage = transformCIImageUsingColor(image: outputImage, color: color)
-                
-                if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
-                    return UIImage(cgImage: cgimg)
-                }
-            }
-            return UIImage(systemName: "xmark.circle") ?? UIImage()
-        } else {
+        guard #available(iOS 13.0, *) else {
             let data = string.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
             
             if let filter = CIFilter(name: "CIQRCodeGenerator") {
@@ -53,9 +38,24 @@ final class AppUtility {
                     
                 }
             }
+            
+            return UIImage(systemName: "xmark.circle")
         }
-        return nil
         
+        let context = CIContext()
+        let filter = CIFilter.qrCodeGenerator()
+        let data = Data(string.utf8)
+        filter.setValue(data, forKey: "inputMessage")
+        let transform = CGAffineTransform(scaleX: 3, y: 3)
+        if var outputImage = filter.outputImage?.transformed(by: transform) {
+            
+            outputImage = transformCIImageUsingColor(image: outputImage, color: color)
+            
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                return UIImage(cgImage: cgimg)
+            }
+        }
+        return UIImage(systemName: "xmark.circle")
     }
     
     private func transformCIImageUsingColor(image: CIImage, color: UIColor? = nil)-> CIImage {

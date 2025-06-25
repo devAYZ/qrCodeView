@@ -17,9 +17,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //imageView.image = AppUtility.sharedInstance.generateQRCode(from: "", color: .blue)
+        imageView.image = AppUtility.sharedInstance.generateQRCode(from: "", color: .blue)
         
-        imageView.generateQRCode(from: "")
+        //imageView.generateQRCode(from: "")
     }
 
 
