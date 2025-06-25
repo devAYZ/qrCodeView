@@ -1,5 +1,5 @@
 //
-//  UIImageView + Ext.swift
+//  AppUtility.swift
 //  qrCodeView
 //
 //  Created by Ayokunle Fatokimi on 25/06/2025.
@@ -9,10 +9,13 @@ import Foundation
 import UIKit
 import CoreImage.CIFilterBuiltins
 
-
-extension UIImageView {
+final class AppUtility {
     
-    func generateQRCode(from string: String, color: UIColor? = nil) {
+    static let sharedInstance = AppUtility()
+    
+    private init() {}
+    
+    func generateQRCode(from string: String, color: UIColor? = nil) -> UIImage? {
         if #available(iOS 13.0, *) {
             let context = CIContext()
             let filter = CIFilter.qrCodeGenerator()
@@ -24,11 +27,10 @@ extension UIImageView {
                 outputImage = transformCIImageUsingColor(image: outputImage, color: color)
                 
                 if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
-                    self.image = UIImage(cgImage: cgimg)
-                    return
+                    return UIImage(cgImage: cgimg)
                 }
             }
-            self.image = UIImage(systemName: "xmark.circle")
+            return UIImage(systemName: "xmark.circle") ?? UIImage()
         } else {
             let data = string.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)
             
@@ -45,15 +47,14 @@ extension UIImageView {
                     UIImage(ciImage: output).draw(in: CGRect(origin: .zero, size: size))
                     if let qrcodeImage = UIGraphicsGetImageFromCurrentImageContext() {
                         if let imageData = qrcodeImage.jpegData(compressionQuality: 1){
-                            self.image = UIImage(data: imageData)
-                            return
+                            return UIImage(data: imageData)
                         }
                     }
                     
                 }
             }
         }
-        self.image = nil
+        return nil
         
     }
     
@@ -65,4 +66,5 @@ extension UIImageView {
         ]
         return image.applyingFilter("CIFalseColor", parameters: colorParameters)
     }
+    
 }
