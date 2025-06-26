@@ -15,6 +15,8 @@ final class AppUtility {
     
     private init() {}
     
+    let repoInfo = "Created by Ayokunle Fatokimi on 25/06/2025 - https://github.com/devAYZ/qrCodeView"
+    
     func generateQRCode(from string: String, color: UIColor? = nil) -> UIImage? {
         guard #available(iOS 13.0, *) else {
             let data = string.data(using: String.Encoding.isoLatin1, allowLossyConversion: false)

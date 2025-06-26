@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct SUIQRView: View {
+    
+    let repoInfo = AppUtility.sharedInstance.repoInfo
+    
     var body: some View {
         VStack {
             var qrImage: UIImage {
-                AppUtility.sharedInstance.generateQRCode(from: "-") ?? .init()
+                AppUtility.sharedInstance.generateQRCode(from: repoInfo) ?? .init()
             }
             Group {
 //                Image(systemName: "xmark.circle")
