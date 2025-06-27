@@ -16,4 +16,4 @@ An App to transform a string to it QR code representation.
 - main
 
 ## Assets
-<img width="400" alt="Demo - iPhone 15 Pro.png" src="/Users/ayokunlefatokimi/Downloads/Demo - iPhone 15 Pro.png">
+<img width="400" height="900" alt="Demo - iPhone 15 Pro.png" src="qrCodeView/Assets/Demo - iPhone 15 Pro.png">
