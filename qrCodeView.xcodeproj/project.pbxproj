@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A6DAF3D2E0EB64500538D3E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAF3C2E0EB64400538D3E /* README.md */; };
+		3A6DAF752E0EBE0900538D3E /* iPhone15.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DAF742E0EBE0900538D3E /* iPhone15.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		3A6DAF162E0BB20D00538D3E /* qrCodeViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = qrCodeViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DAF202E0BB20D00538D3E /* qrCodeViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = qrCodeViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A6DAF3C2E0EB64400538D3E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3A6DAF742E0EBE0900538D3E /* iPhone15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone15.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				3A6DAF3C2E0EB64400538D3E /* README.md */,
+				3A6DAF742E0EBE0900538D3E /* iPhone15.png */,
 				3A6DAF022E0BB20A00538D3E /* qrCodeView */,
 				3A6DAF192E0BB20D00538D3E /* qrCodeViewTests */,
 				3A6DAF232E0BB20D00538D3E /* qrCodeViewUITests */,
@@ -231,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A6DAF752E0EBE0900538D3E /* iPhone15.png in Resources */,
 				3A6DAF3D2E0EB64500538D3E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
