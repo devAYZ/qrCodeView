@@ -18,7 +18,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        imageView.generateQRCode(from: AppUtility.sharedInstance.repoInfo)
+        imageView.generateQRCode(from: AppUtility.sharedInstance.repoInfo,
+                                 qrColor: .blue)
         
         checkSUIViewButton.addTarget(self, action: #selector(handelCheckSUIView), for: .touchUpInside)
     }

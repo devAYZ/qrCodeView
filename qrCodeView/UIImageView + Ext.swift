@@ -12,26 +12,27 @@ import CoreImage.CIFilterBuiltins
 
 extension UIImageView {
     
-    func generateQRCode(from string: String, color: UIColor? = nil) {
-        let context = CIContext()
+    @discardableResult
+    func generateQRCode(from string: String, qrColor: UIColor? = nil) -> UIImage? {
         let filter = CIFilter.qrCodeGenerator()
-        let data = Data(string.utf8)
-        filter.setValue(data, forKey: "inputMessage")
+        let context = CIContext()
+        filter.setValue(Data(string.utf8), forKey: "inputMessage")
         let transform = CGAffineTransform(scaleX: 3, y: 3)
-        if var outputImage = filter.outputImage?.transformed(by: transform) {
-            
-            outputImage = transformCIImageUsingColor(image: outputImage, color: color)
-            
-            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
-                image = UIImage(cgImage: cgimg)
-                return
-            }
+        guard let output = filter.outputImage?.transformed(by: transform) else {
+            return nil
         }
-        image = UIImage(systemName: "xmark.circle")
+        
+        let coloredOutput = paintCIImage(image: output, withColor: qrColor)
+        guard let cgImage = context.createCGImage(coloredOutput, from: coloredOutput.extent) else {
+            return nil
+        }
+        
+        image = UIImage(cgImage: cgImage)
+        return UIImage(cgImage: cgImage)
     }
     
-    private func transformCIImageUsingColor(image: CIImage, color: UIColor? = nil) -> CIImage {
-        guard let color = color else { return image }
+    private func paintCIImage(image: CIImage, withColor: UIColor? = nil) -> CIImage {
+        guard let color = withColor else { return image }
         let colorParameters = [
             "inputColor0": CIColor(color: color), // Foreground
             "inputColor1": CIColor(color: UIColor.clear) // Background

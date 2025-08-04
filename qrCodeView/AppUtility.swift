@@ -27,7 +27,7 @@ final class AppUtility {
                 
                 
                 if var output = filter.outputImage?.transformed(by: transform) {
-                    output = transformCIImageUsingColor(image: output, color: color)
+                    output = paintCIImage(image: output, withColor: color)
                     let size = CGSize(width: 800, height: 800)
                     UIGraphicsBeginImageContextWithOptions(size, false, 0)
                     defer { UIGraphicsEndImageContext() }
@@ -51,7 +51,7 @@ final class AppUtility {
         let transform = CGAffineTransform(scaleX: 3, y: 3)
         if var outputImage = filter.outputImage?.transformed(by: transform) {
             
-            outputImage = transformCIImageUsingColor(image: outputImage, color: color)
+            outputImage = paintCIImage(image: outputImage, withColor: color)
             
             if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
                 return UIImage(cgImage: cgimg)
@@ -60,8 +60,8 @@ final class AppUtility {
         return UIImage(systemName: "xmark.circle")
     }
     
-    private func transformCIImageUsingColor(image: CIImage, color: UIColor? = nil)-> CIImage {
-        guard let color = color else { return image }
+    private func paintCIImage(image: CIImage, withColor: UIColor? = nil)-> CIImage {
+        guard let color = withColor else { return image }
         let colorParameters = [
             "inputColor0": CIColor(color: color), // Foreground
             "inputColor1": CIColor(color: UIColor.clear) // Background
@@ -69,4 +69,23 @@ final class AppUtility {
         return image.applyingFilter("CIFalseColor", parameters: colorParameters)
     }
     
+    
+    @discardableResult
+    func generateQRCode_V2(from string: String, qrColor: UIColor? = nil) -> UIImage? {
+        let filter = CIFilter.qrCodeGenerator()
+        let context = CIContext()
+        filter.setValue(Data(string.utf8), forKey: "inputMessage")
+        
+        let transform = CGAffineTransform(scaleX: 3, y: 3)
+        guard let output = filter.outputImage?.transformed(by: transform) else {
+            return nil
+        }
+        
+        let coloredOutput = paintCIImage(image: output, withColor: qrColor)
+        guard let cgimg = context.createCGImage(coloredOutput, from: coloredOutput.extent) else {
+            return nil
+        }
+        
+        return UIImage(cgImage: cgimg)
+    }
 }

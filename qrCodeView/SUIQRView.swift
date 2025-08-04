@@ -14,11 +14,9 @@ struct SUIQRView: View {
     var body: some View {
         VStack {
             var qrImage: UIImage {
-                AppUtility.sharedInstance.generateQRCode(from: repoInfo) ?? .init()
+                AppUtility.sharedInstance.generateQRCode_V2(from: repoInfo, qrColor: .blue) ?? .init()
             }
             Group {
-//                Image(systemName: "xmark.circle")
-//                    .resizable()
                 Image(uiImage: qrImage)
                     .resizable()
             }
