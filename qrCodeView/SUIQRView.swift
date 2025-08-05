@@ -14,11 +14,12 @@ struct SUIQRView: View {
     var body: some View {
         VStack {
             var qrImage: UIImage {
-                AppUtility.sharedInstance.generateQRCode_V2(from: repoInfo, qrColor: .blue) ?? .init()
+                AppUtility.sharedInstance.generateQRCode_V2(from: repoInfo, qrColor: .systemBlue) ?? .init()
             }
             Group {
                 Image(uiImage: qrImage)
                     .resizable()
+                    .interpolation(.none)
             }
             .frame(width: 300, height: 300)
         }

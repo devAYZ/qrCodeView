@@ -18,8 +18,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        imageView.layer.minificationFilter = .nearest
+        imageView.layer.magnificationFilter = .nearest
         imageView.generateQRCode(from: AppUtility.sharedInstance.repoInfo,
-                                 qrColor: .blue)
+                                 qrColor: .systemBlue)
         
         checkSUIViewButton.addTarget(self, action: #selector(handelCheckSUIView), for: .touchUpInside)
     }
